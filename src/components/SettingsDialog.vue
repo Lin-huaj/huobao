@@ -19,17 +19,36 @@ const channels = [
   { 
     id: 'chatfire', 
     name: 'Chatfire',
-    baseUrl: 'https://api.chatfire.site/v1',
+    baseUrl:'https://api.chatfire.site/v1',
     models: [
-      // 'gpt-4o',
-      // 'claude-sonnet-4-5-20250929',
-      // 'kimi-k2-thinking',
       'gemini-3-flash-preview',
       'doubao-seed-1-8-251228',
       'gemini-3-pro-preview',
+      // 'gpt-4o',
+      // 'claude-sonnet-4-5-20250929',
+      // 'kimi-k2-thinking',
       // 'gemini-2.5-pro'
     ]
   },
+    {
+    id: 'deepseek', 
+    name: 'DeepSeek',
+    baseUrl:'https://api.deepseek.com/v1',
+    models: [
+        'deepseek-chat',
+        'deepseek-reasoner',
+        'deepseek-coder'
+    ]
+  },
+    {
+    id: '12ai', 
+    name: '12ai',
+    baseUrl:'https://cdn.12ai.org/v1',
+    models: [
+        'gemini-3-pro-preview',
+        'gpt-5.1'
+    ]
+  }
   // { 
   //   id: 'openai', 
   //   name: 'OpenAI',
@@ -45,7 +64,7 @@ const channels = [
 ]
 
 // Current channel - 当前渠道
-const currentChannel = ref('chatfire')
+const currentChannel = ref('deepseek')
 
 // Channel options for select - 渠道选项
 const channelOptions = channels.map(c => ({ label: c.name, value: c.id }))
@@ -59,10 +78,10 @@ const currentChannelModels = computed(() => {
 
 // Initialize with default values - 使用默认值初始化
 const localConfig = ref({
-  channel: 'chatfire',
-  baseUrl: 'https://api.chatfire.site/v1',
+  channel: 'deepseek',
+  baseUrl: 'https://api.deepseek.com/v1',
   apiKey: '',
-  model: 'gemini-3-flash-preview',
+  model: 'deepseek-chat',
   temperature: 0.7,
   maxTokens: 8192,
   timeout: 600
@@ -102,7 +121,7 @@ watch(() => props.modelValue, (val) => {
   if (val) {
     localConfig.value = { ...settings.apiConfig }
     localStageModels.value = { ...settings.stageModels }
-    currentChannel.value = localConfig.value.channel || 'chatfire'
+    currentChannel.value = localConfig.value.channel || 'deepseek'
   }
 }, { immediate: true })
 
@@ -143,7 +162,8 @@ async function testConnection() {
 }
 
 function goToGetKey() {
-  window.open('https://api.chatfire.site/login?inviteCode=EEE80324', '_blank')
+  window.open('https://platform.deepseek.com/api_keys', '_blank') 
+  //window.open('https://api.chatfire.site/login?inviteCode=EEE80324', '_blank')
 }
 </script>
 
@@ -244,12 +264,12 @@ function goToGetKey() {
           <n-button @click="goToGetKey" tertiary>
             获取 Key
           </n-button>
-          <!-- <n-button @click="testConnection" tertiary>
+          <n-button @click="testConnection" tertiary>
             <template #icon>
               <n-icon><FlashOutline /></n-icon>
             </template>
             测试连接
-          </n-button> -->
+          </n-button>
         </n-space>
         <n-space>
           <n-button @click="emit('update:modelValue', false)">取消</n-button>

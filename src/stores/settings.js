@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 import { ref, watch, computed } from 'vue'
 
 // Default model config - 默认模型配置
-const DEFAULT_MODEL = 'gemini-3-flash-preview'
+const DEFAULT_MODEL = 'deepseek-chat'
 
 // Settings store - 设置状态管理
 export const useSettingsStore = defineStore('settings', () => {
@@ -11,8 +11,8 @@ export const useSettingsStore = defineStore('settings', () => {
     (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches))
   
   const apiConfig = ref(JSON.parse(localStorage.getItem('api_config') || JSON.stringify({
-    channel: 'chatfire',
-    baseUrl: 'https://api.chatfire.site/v1',
+    channel: 'deepseek',
+    baseUrl: 'https://api.deepseek.com/v1',
     apiKey: '',
     model: DEFAULT_MODEL,
     temperature: 0.7,
