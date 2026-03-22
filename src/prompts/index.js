@@ -7,6 +7,7 @@ import { architecturePrompts } from './architecture'
 import { chapterPrompts } from './chapter'
 import { utilityPrompts } from './utility'
 import { compassPrompts } from './compass'
+import { interviewPrompts } from './interview'
 
 /**
  * 提示词管理器
@@ -18,7 +19,8 @@ class PromptManager {
       architecture: architecturePrompts,
       chapter: chapterPrompts,
       utility: utilityPrompts,
-      compass: compassPrompts
+      compass: compassPrompts,
+      interview: interviewPrompts
     }
     
     // 版本号，用于追踪提示词更新
@@ -100,3 +102,4 @@ export { architecturePrompts } from './architecture'
 export { chapterPrompts } from './chapter'
 export { utilityPrompts } from './utility'
 export { compassPrompts } from './compass'
+export { interviewPrompts } from './interview'
